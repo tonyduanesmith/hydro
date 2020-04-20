@@ -5,6 +5,7 @@ import fetch from "node-fetch";
 import { ROWS, COLUMNS } from "./constants.js";
 import CarouselIndicators from "./CarouselIndicators.js";
 import NavigationArrows from "./NavigationArrows.js";
+import DataLine from "./DataLine.js";
 
 const board = new five.Board({
   io: new raspi.RaspiIO(),
@@ -55,6 +56,9 @@ board.on("ready", () => {
   // lcd.useChar("box8");
 
   // lcd.cursor(0, 0).print("Food");
+  DataLine(lcd, "Light:", "1000lx", 0);
+  DataLine(lcd, "Food:", "548", 1);
+  DataLine(lcd, "Water:", "85%", 2);
   NavigationArrows(lcd);
   CarouselIndicators(lcd, state.numberOfPages, state.selectedPage);
   lcd.cursor(0, 49);
