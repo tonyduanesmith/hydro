@@ -2,25 +2,13 @@ import raspi from "raspi-io";
 import five from "johnny-five";
 import fetch from "node-fetch";
 
-import { ROWS, COLUMNS } from "./state.js";
+import { ROWS, COLUMNS } from "./constants.js";
 import CarouselIndicators from "./CarouselIndicators.js";
+import NavigationArrows from "./NavigationArrows.js";
 
 const board = new five.Board({
   io: new raspi.RaspiIO(),
 });
-
-const API_KEY = "";
-const coords = {
-  long: 53.73769,
-  lat: -1.69329,
-};
-
-const fetchWeatherData = async (api, coords) => {
-  const data = await fetch(
-    `https://api.darksky.net/forecast/${api}/${coords.long},${coords.lat}`,
-  );
-  return await data.json();
-};
 
 board.on("ready", () => {
   var lcd = new five.LCD({
@@ -28,6 +16,11 @@ board.on("ready", () => {
     cols: COLUMNS,
     rows: ROWS,
   });
+
+  const state = {
+    numberOfPages: 4,
+    selectedPage: 1,
+  };
 
   //Boxed
   // lcd.useChar("box11")
@@ -62,7 +55,7 @@ board.on("ready", () => {
   // lcd.useChar("box8");
 
   // lcd.cursor(0, 0).print("Food");
-
-  CarouselIndicators(lcd, 4, 1);
+  NavigationArrows(lcd);
+  CarouselIndicators(lcd, state.numberOfPages, state.selectedPage);
   lcd.cursor(0, 49);
 });
