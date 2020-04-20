@@ -10,8 +10,9 @@ board.on("ready", () => {
     numberOfPages: 4,
     selectedPage: 1,
   };
-
-  MainScreen();
+  if (state.selectedPage === 1) {
+    MainScreen();
+  }
   NavigationArrows();
   CarouselIndicators(state.numberOfPages, state.selectedPage);
   lcd.cursor(0, 49);
