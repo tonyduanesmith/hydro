@@ -1,5 +1,7 @@
-import { COLUMNS } from "./constants.js";
-const DataLine = (lcd, label, value, row) => {
+import lcd from "../../hardware/lcd/index.js";
+import { COLUMNS } from "../../constants.js";
+
+const DataLine = (label, value, row) => {
   const labelStartColumn = 2;
   const valueStartColumn = COLUMNS - 2 - value.length;
   lcd.cursor(row, labelStartColumn).print(label);

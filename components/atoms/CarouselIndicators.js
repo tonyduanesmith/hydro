@@ -1,6 +1,7 @@
-import { ROWS, COLUMNS } from "./constants.js";
+import lcd from "../../hardware/lcd/index.js";
+import { ROWS, COLUMNS } from "../../constants.js";
 
-const CarouselIndicators = (lcd, numberOfPages, selectedPage) => {
+const CarouselIndicators = (numberOfPages, selectedPage) => {
   const startRow = ROWS - 1;
   const startColumn = Math.ceil(COLUMNS / 2) - Math.ceil(numberOfPages / 2);
   let indicators = "";

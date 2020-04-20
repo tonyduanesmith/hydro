@@ -1,6 +1,7 @@
-import { ROWS, COLUMNS } from "./constants.js";
+import lcd from "../../hardware/lcd/index.js";
+import { ROWS, COLUMNS } from "../../constants.js";
 
-const NavigationArrows = (lcd) => {
+const NavigationArrows = () => {
   const startRow = Math.floor(ROWS / 2) - 1;
   const leftArrowColumn = 0;
   const rightArrowColumn = COLUMNS - 1;
