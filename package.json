@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "johnny-five": "^1.4.0",
+    "miflora": "^1.0.5",
     "node-fetch": "^2.6.0",
     "prettier": "^2.0.4",
     "raspi-io": "^11.0.0"
