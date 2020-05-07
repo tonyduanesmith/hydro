@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node --experimental-modules app.js"
+    "start": "node --experimental-modules app.mjs"
   },
   "author": "",
   "license": "ISC",

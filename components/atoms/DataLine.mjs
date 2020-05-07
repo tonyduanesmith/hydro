@@ -1,5 +1,5 @@
-import lcd from "../../hardware/lcd/index.js";
-import { COLUMNS } from "../../constants.js";
+import lcd from "../../hardware/lcd/index.mjs";
+import { COLUMNS } from "../../constants.mjs";
 
 const DataLine = (label, value, row) => {
   const labelStartColumn = 2;

@@ -1,8 +1,8 @@
-import Text from "../../atoms/Text.js";
-import lcd from "../../../hardware/lcd/index.js";
-import { sleep } from "../../../utils/index.js";
-import { getDevice } from "../../../hardware/miflora/index.js";
-import { MIFLORA_MAC_ADDRESS } from "../../../constants.js";
+import Text from "../../atoms/Text.mjs";
+import lcd from "../../../hardware/lcd/index.mjs";
+import { sleep } from "../../../utils/index.mjs";
+import { getDevice } from "../../../hardware/miflora/index.mjs";
+import { MIFLORA_MAC_ADDRESS } from "../../../constants.mjs";
 
 const SearchingScreen = async () => {
   lcd.clear();

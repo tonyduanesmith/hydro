@@ -1,11 +1,13 @@
-import DataLine from "../../atoms/DataLine.js";
-import Text from "../../atoms/Text.js";
-import lcd from "../../../hardware/lcd/index.js";
-import { getData } from "../../../hardware/miflora/index.js";
+import DataLine from "../../atoms/DataLine.mjs";
+import Text from "../../atoms/Text.mjs";
+import lcd from "../../../hardware/lcd/index.mjs";
+import { getData } from "../../../hardware/miflora/index.mjs";
 
-const MainScreen = (devices) => {
+const MainScreen = (devices, prevData) => {
   lcd.clear();
-  Text("Fetching Data...", "center", 1);
+  DataLine("Light:", "0Lx", 0);
+  DataLine("Food:", "0", 1);
+  DataLine("Water:", "0%", 2);
   setInterval(async () => {
     try {
       const data = await getData(devices[0]);
@@ -19,6 +21,7 @@ const MainScreen = (devices) => {
       DataLine("Food:", food, 1);
       DataLine("Water:", water, 2);
     } catch (e) {
+      console.log(e)
       Text("                ", "center", 0);
       Text("Re-connecting...", "center", 1);
       Text("                ", "center", 2);
