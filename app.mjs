@@ -24,26 +24,68 @@ const init = () => {
 
     const buttonPrevious = new five.Button("GPIO5");
     const buttonNext = new five.Button("GPIO6");
-    const motor = new five.Motor({
+    const motor1 = new five.Motor({
       pins: {
-        pwm: "GPIO22",
+        dir: "GPIO25",
+        cdir: "GPIO8",
+        pwm: "GPIO7",
+      }
+    })
+
+    const motor2 = new five.Motor({
+      pins: {
         dir: "GPIO17",
-        cdir: "GPIO27"
+        cdir: "GPIO27",
+        pwm: "GPIO22",
+      }
+    })
+
+    const motor3 = new five.Motor({
+      pins: {
+        dir: "GPIO16",
+        cdir: "GPIO20",
+        pwm: "GPIO21",
+      }
+    })
+
+    const motor4 = new five.Motor({
+      pins: {
+        dir: "GPIO13",
+        cdir: "GPIO19",
+        pwm: "GPIO26",
       }
     })
 
     board.repl.inject({
       buttonPrevious,
       buttonNext,
-      motor
+      motor1,
+      motor2,
+      motor3,
+      motor4,
     });
 
     // 6ml of liquid
-    motor.start()
-    motor.forward(255)
-    await sleep(50000)
-    motor.stop()
 
+    motor1.start()
+    motor1.forward(255)
+    await sleep(10000)
+    motor1.stop()
+    
+    motor2.start()
+    motor2.forward(255)
+    await sleep(10000)
+    motor2.stop()
+
+    motor3.start()
+    motor3.forward(255)
+    await sleep(10000)
+    motor3.stop()
+
+    motor4.start()
+    motor4.forward(255)
+    await sleep(10000)
+    motor4.stop()
 
 
     state.devices = await SearchingScreen();
@@ -53,7 +95,11 @@ const init = () => {
     }
 
     state.fetchDataInterval = setInterval(async () => {
-      state.sensorData = await getData(state.devices[0], state.sensorData);
+      try {
+        state.sensorData = await getData(state.devices[0], state.sensorData);
+      } catch(e){
+        console.log(e)
+      }
     },10000)
 
     buttonPrevious.on("down", () => {
