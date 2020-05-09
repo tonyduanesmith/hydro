@@ -67,25 +67,25 @@ const init = () => {
 
     // 6ml of liquid
 
-    motor1.start()
-    motor1.forward(255)
-    await sleep(10000)
-    motor1.stop()
+    // motor1.start()
+    // motor1.forward(255)
+    // await sleep(10000)
+    // motor1.stop()
     
-    motor2.start()
-    motor2.forward(255)
-    await sleep(10000)
-    motor2.stop()
+    // motor2.start()
+    // motor2.forward(255)
+    // await sleep(10000)
+    // motor2.stop()
 
-    motor3.start()
-    motor3.forward(255)
-    await sleep(10000)
-    motor3.stop()
+    // motor3.start()
+    // motor3.forward(255)
+    // await sleep(10000)
+    // motor3.stop()
 
-    motor4.start()
-    motor4.forward(255)
-    await sleep(10000)
-    motor4.stop()
+    // motor4.start()
+    // motor4.forward(255)
+    // await sleep(10000)
+    // motor4.stop()
 
 
     state.devices = await SearchingScreen();
@@ -97,6 +97,12 @@ const init = () => {
     state.fetchDataInterval = setInterval(async () => {
       try {
         state.sensorData = await getData(state.devices[0], state.sensorData);
+        if(state.sensorData && state.sensorData.sensorValues && state.sensorData.sensorValues.moisture < 50){
+          motor4.start()
+          motor4.forward(255)
+        } else {
+          motor4.stop()
+        }
       } catch(e){
         console.log(e)
       }
