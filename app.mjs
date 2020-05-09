@@ -8,13 +8,19 @@ import MainScreen from "./components/pages/main/index.mjs";
 import BatteryScreen from "./components/pages/battery/index.mjs";
 import SearchingScreen from "./components/pages/searching/index.mjs";
 import { sleep } from './utils/index.mjs'
+import { getData } from './hardware/miflora/index.mjs'
+
+const state = {
+  numberOfPages: 2,
+  selectedPage: 1,
+  fetchDataInterval: null,
+  renderDisplayInterval: null,
+  sensorData: null,
+  devices: []
+};
 
 const init = () => {
   board.on("ready", async () => {
-    const state = {
-      numberOfPages: 2,
-      selectedPage: 1,
-    };
 
     const buttonPrevious = new five.Button("GPIO5");
     const buttonNext = new five.Button("GPIO6");
@@ -40,36 +46,54 @@ const init = () => {
 
 
 
-    const devices = await SearchingScreen();
-    if (!devices.length) {
+    state.devices = await SearchingScreen();
+
+    if (!state.devices.length) {
       return null;
     }
+
+    state.fetchDataInterval = setInterval(async () => {
+      state.sensorData = await getData(state.devices[0], state.sensorData);
+    },10000)
 
     buttonPrevious.on("down", () => {
       console.log("previous");
       state.selectedPage = (state.selectedPage + 1 > state.numberOfPages) ? 1 : state.selectedPage + 1;
-      render(devices, state)
+      clearInterval(state.renderDisplayInterval);
+      render()
     });
 
     buttonNext.on("down", () => {
       console.log("next");
       state.selectedPage = (state.selectedPage - 1 < 1) ? state.numberOfPages : state.selectedPage - 1;
-      render(devices, state)
+      clearInterval(state.renderDisplayInterval);
+      render()
     });
 
-    render(devices, state)
+    render()
   });
 };
 
-const render = (devices, state) => {
-    if(state.selectedPage === 1) {
-      MainScreen(devices)
-    } else if( state.selectedPage === 2){
-      BatteryScreen(devices)
+const render = async () => {
+  const { selectedPage, numberOfPages } = state
+  if (selectedPage === 1) {
+    MainScreen(state.sensorData);
+  } else if (selectedPage === 2) {
+    BatteryScreen(state.sensorData);
+  }
+  NavigationArrows();
+  CarouselIndicators(numberOfPages, selectedPage);
+  lcd.cursor(0, 49);
+  
+  state.renderDisplayInterval = setInterval(() => {
+    if (selectedPage === 1) {
+      MainScreen(state.sensorData);
+      lcd.cursor(0, 49);
+    } else if (selectedPage === 2) {
+      BatteryScreen(state.sensorData);
+      lcd.cursor(0, 49);
     }
-    NavigationArrows()
-    CarouselIndicators(state.numberOfPages, state.selectedPage)
-    lcd.cursor(0, 49)
+  }, 10000);
 }
 
 init();

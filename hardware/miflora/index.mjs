@@ -10,9 +10,14 @@ export const getDevice = async (macAddress) => {
   return devices;
 };
 
-export const getData = async (device) => {
-  const sensorData = await device.querySensorValues();
-  const firmwareData = await device.queryFirmwareInfo();
-  const data = {...sensorData, ...firmwareData}
-  return data;
+export const getData = async (device, prevData) => {
+  try{
+    const sensorData = await device.querySensorValues();
+    const firmwareData = await device.queryFirmwareInfo();
+    const data = {...sensorData, ...firmwareData}
+    return data;
+  } catch(e) {
+    console.log(e)
+    return prevData
+  }
 };

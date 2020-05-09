@@ -2,7 +2,7 @@
     "trailingComma": "all",
     "overrides": [
         {
-            "files": "*.js",
+            "files": ["*.js", "*.mjs"],
             "options": {
                 "parser": "babel"
             }
