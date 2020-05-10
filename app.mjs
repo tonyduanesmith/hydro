@@ -97,16 +97,44 @@ const init = () => {
     state.fetchDataInterval = setInterval(async () => {
       try {
         state.sensorData = await getData(state.devices[0], state.sensorData);
-        if(state.sensorData && state.sensorData.sensorValues && state.sensorData.sensorValues.moisture < 50){
+        if(state.sensorData && state.sensorData.sensorValues && state.sensorData.sensorValues.moisture < 35){
           motor4.start()
           motor4.forward(255)
         } else {
           motor4.stop()
         }
+
+        if(state.sensorData && state.sensorData.sensorValues && state.sensorData.sensorValues.fertility < 1200) {
+          motor1.start()
+          motor1.forward(255)
+          await sleep(3000)
+          motor1.stop()
+          
+          motor2.start()
+          motor2.forward(255)
+          await sleep(2000)
+          motor2.stop()
+
+          motor3.start()
+          motor3.forward(255)
+          await sleep(1000)
+          motor3.stop()
+
+        } else {
+          motor1.stop()
+          motor2.stop()
+          motor3.stop()
+        }
       } catch(e){
         console.log(e)
+          motor1.stop()
+          motor2.stop()
+          motor3.stop()
+          motor4.stop()
+          state.devices[0].disconnect()
       }
-    },10000)
+      //90000 for every 15 mins
+    },90000)
 
     buttonPrevious.on("down", () => {
       console.log("previous");
