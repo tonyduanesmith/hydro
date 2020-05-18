@@ -1,16 +1,15 @@
 import DataLine from "../../atoms/DataLine.mjs";
 
 const BatteryScreen = (data) => {
-    const { temperature } = data.sensorValues;
-    const { battery, firmware } = data.firmwareInfo;
+  const { battery, temperature } = data;
 
-    const temp = `${temperature.toString()}°C`;
-    const batteryString = `${battery.toString()}%`;
-    const firmwareString = `${firmware.toString()}`;
+  const temp = `${temperature.toString()}°C`;
+  const batteryString = `${battery.toString()}%`;
+  const firmwareString = "v1.2.0";
 
-    DataLine("Temp:", temp, 0);
-    DataLine("Battery:", batteryString, 1);
-    DataLine("Firmware:", firmwareString, 2);
+  DataLine("Temp:", temp, 0);
+  DataLine("Battery:", batteryString, 1);
+  DataLine("Firmware:", firmwareString, 2);
 };
 
 export default BatteryScreen;

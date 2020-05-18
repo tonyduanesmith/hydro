@@ -1,1 +1,4 @@
 /node_modules
+/db
+ecosystem.config.js
+db.json

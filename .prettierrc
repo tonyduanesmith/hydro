@@ -1,20 +1,4 @@
 {
     "trailingComma": "all",
-    "overrides": [
-        {
-            "files": ["*.js", "*.mjs"],
-            "options": {
-                "parser": "babel"
-            }
-        },
-        {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ],
-            "options": {
-                "parser": "typescript"
-            }
-        }
-    ]
+    "semi": true
 }

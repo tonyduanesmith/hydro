@@ -11,9 +11,12 @@
   "dependencies": {
     "johnny-five": "^1.4.0",
     "miflora": "^1.0.5",
+    "moment": "^2.25.3",
     "node-fetch": "^2.6.0",
-    "prettier": "^2.0.4",
     "raspi-io": "^11.0.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "prettier": "2.0.5"
+  }
 }
