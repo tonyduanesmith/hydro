@@ -1,5 +1,5 @@
-import lcd from "../../hardware/lcd/index.mjs";
-import { COLUMNS } from "../../constants.mjs";
+import lcd from "../../../hardware/lcd/index.mjs";
+import { COLUMNS } from "../../../constants.mjs";
 
 const Text = (value, align, row) => {
   if (align === "left") {

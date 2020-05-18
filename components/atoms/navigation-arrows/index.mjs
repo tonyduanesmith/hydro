@@ -1,5 +1,5 @@
-import lcd from "../../hardware/lcd/index.mjs";
-import { ROWS, COLUMNS } from "../../constants.mjs";
+import lcd from "../../../hardware/lcd/index.mjs";
+import { ROWS, COLUMNS } from "../../../constants.mjs";
 
 const NavigationArrows = () => {
   const startRow = Math.floor(ROWS / 2) - 1;

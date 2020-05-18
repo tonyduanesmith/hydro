@@ -1,4 +1,4 @@
-import DataLine from "../../atoms/DataLine.mjs";
+import DataLine from "../../atoms/data-line/index.mjs";
 
 const BatteryScreen = (data) => {
   const { battery, temperature } = data;

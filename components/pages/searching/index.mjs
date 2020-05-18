@@ -1,4 +1,4 @@
-import Text from "../../atoms/Text.mjs";
+import Text from "../../atoms/text/index.mjs";
 import lcd from "../../../hardware/lcd/index.mjs";
 import { sleep } from "../../../utils/index.mjs";
 import { getDevice } from "../../../hardware/miflora/index.mjs";

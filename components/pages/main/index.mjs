@@ -1,4 +1,4 @@
-import DataLine from "../../atoms/DataLine.mjs";
+import DataLine from "../../atoms/data-line/index.mjs";
 
 const MainScreen = (data) => {
   if (data) {

@@ -1,7 +1,7 @@
-import Graph from '../../atoms/Graph.mjs'
+import Graph from "../../atoms/graph/index.mjs";
 
 const LightGraph = (data) => {
-    Graph()
-}
+  Graph();
+};
 
-export default LightGraph
+export default LightGraph;
