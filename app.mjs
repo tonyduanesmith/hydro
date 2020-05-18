@@ -10,6 +10,7 @@ import CarouselIndicators from "./components/atoms/CarouselIndicators.mjs";
 import NavigationArrows from "./components/atoms/NavigationArrows.mjs";
 import BatteryScreen from "./components/pages/battery/index.mjs";
 import Graph from "./components/atoms/Graph.mjs";
+import Menu from "./components/pages/menu/index.mjs";
 import { state } from "./state.mjs";
 import { setSavedSensorData } from "./utils/index.mjs";
 
@@ -100,80 +101,82 @@ const init = async () => {
 };
 
 const render = async () => {
-  const { selectedPage, numberOfPages } = state;
-  if (selectedPage === 1) {
-    MainScreen(state.sensorData);
-  } else if (selectedPage === 2) {
-    BatteryScreen(state.sensorData);
-  } else if (selectedPage === 3) {
-    Graph(
-      "Light",
-      state.savedSensorData.map((data) => data.lux),
-    );
-  } else if (selectedPage === 4) {
-    Graph(
-      "Food",
-      state.savedSensorData.map((data) => data.fertility),
-    );
-  } else if (selectedPage === 5) {
-    Graph(
-      "Water",
-      state.savedSensorData.map((data) => data.moisture),
-    );
-  } else if (selectedPage === 6) {
-    Graph(
-      "Temp",
-      state.savedSensorData.map((data) => data.temperature),
-    );
-  } else if (selectedPage === 7) {
-    Graph(
-      "Power",
-      state.savedSensorData.map((data) => data.battery),
-    );
-  }
-  NavigationArrows();
-  CarouselIndicators(numberOfPages, selectedPage);
-  lcd.cursor(0, 49);
+  Menu();
 
-  state.renderDisplayInterval = setInterval(() => {
-    if (selectedPage === 1) {
-      MainScreen(state.sensorData);
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 2) {
-      BatteryScreen(state.sensorData);
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 3) {
-      Graph(
-        "Light",
-        state.savedSensorData.map((data) => data.lux),
-      );
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 4) {
-      Graph(
-        "Food",
-        state.savedSensorData.map((data) => data.fertility),
-      );
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 5) {
-      Graph(
-        "Water",
-        state.savedSensorData.map((data) => data.moisture),
-      );
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 6) {
-      Graph(
-        "Temp",
-        state.savedSensorData.map((data) => data.temperature),
-      );
-      lcd.cursor(0, 49);
-    } else if (selectedPage === 7) {
-      Graph(
-        "Power",
-        state.savedSensorData.map((data) => data.battery),
-      );
-      lcd.cursor(0, 49);
-    }
-  }, 10000);
+  // const { selectedPage, numberOfPages } = state;
+  // if (selectedPage === 1) {
+  //   MainScreen(state.sensorData);
+  // } else if (selectedPage === 2) {
+  //   BatteryScreen(state.sensorData);
+  // } else if (selectedPage === 3) {
+  //   Graph(
+  //     "Light",
+  //     state.savedSensorData.map((data) => data.lux),
+  //   );
+  // } else if (selectedPage === 4) {
+  //   Graph(
+  //     "Food",
+  //     state.savedSensorData.map((data) => data.fertility),
+  //   );
+  // } else if (selectedPage === 5) {
+  //   Graph(
+  //     "Water",
+  //     state.savedSensorData.map((data) => data.moisture),
+  //   );
+  // } else if (selectedPage === 6) {
+  //   Graph(
+  //     "Temp",
+  //     state.savedSensorData.map((data) => data.temperature),
+  //   );
+  // } else if (selectedPage === 7) {
+  //   Graph(
+  //     "Power",
+  //     state.savedSensorData.map((data) => data.battery),
+  //   );
+  // }
+  // NavigationArrows();
+  // CarouselIndicators(numberOfPages, selectedPage);
+  // lcd.cursor(0, 49);
+
+  // state.renderDisplayInterval = setInterval(() => {
+  //   if (selectedPage === 1) {
+  //     MainScreen(state.sensorData);
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 2) {
+  //     BatteryScreen(state.sensorData);
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 3) {
+  //     Graph(
+  //       "Light",
+  //       state.savedSensorData.map((data) => data.lux),
+  //     );
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 4) {
+  //     Graph(
+  //       "Food",
+  //       state.savedSensorData.map((data) => data.fertility),
+  //     );
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 5) {
+  //     Graph(
+  //       "Water",
+  //       state.savedSensorData.map((data) => data.moisture),
+  //     );
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 6) {
+  //     Graph(
+  //       "Temp",
+  //       state.savedSensorData.map((data) => data.temperature),
+  //     );
+  //     lcd.cursor(0, 49);
+  //   } else if (selectedPage === 7) {
+  //     Graph(
+  //       "Power",
+  //       state.savedSensorData.map((data) => data.battery),
+  //     );
+  //     lcd.cursor(0, 49);
+  //   }
+  // }, 10000);
 };
 
 init();
